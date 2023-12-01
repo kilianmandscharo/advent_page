@@ -21,12 +21,18 @@ interface Props {
 export default function Home({ items }: Props) {
   return (
     <main>
-      <h1 className="text-6xl mb-4 text-yellow-500">Advent</h1>
-      <h2 className="text-4xl mb-4">{`Gewinner: (${dayjs().format(
+      <h1 className="text-6xl mb-4 text-yellow-400">Advent</h1>
+      <h2 className="text-4xl mb-4">{`Gewinner (${dayjs().format(
         "DD.MM.YYYY"
       )})`}</h2>
+      <a
+        className="underline"
+        href="https://schwabmuenchen-lechfeld-buchloe.lions.de/buchloe"
+      >
+        Zum Gewinnspiel
+      </a>
       {items.length === 0 && <p className="italic">Keine Gewinnzahlen</p>}
-      <div className="grid grid-cols-2 mb-4 w-28">
+      <div className="grid grid-cols-2 my-4 w-28">
         {items.map((item) => (
           <p
             className={item.won ? "text-green-500" : "text-red-500"}
@@ -36,12 +42,15 @@ export default function Home({ items }: Props) {
           </p>
         ))}
       </div>
-      <a
-        className="underline"
-        href="https://schwabmuenchen-lechfeld-buchloe.lions.de/buchloe"
-      >
-        Zum Gewinnspiel
-      </a>
+      <p>
+        Seite von{" "}
+        <a
+          href="https//dominik-heller.de"
+          className="underline text-yellow-400"
+        >
+          Dominik Heller
+        </a>
+      </p>
     </main>
   );
 }
