@@ -3,6 +3,7 @@ import dayOfYear from "dayjs/plugin/dayOfYear";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 
 import { parse, Node, HTMLElement } from "node-html-parser";
+import Image from "next/image";
 
 dayjs.extend(dayOfYear);
 dayjs.extend(customParseFormat);
@@ -19,9 +20,19 @@ interface Props {
 }
 
 export default function Home({ items }: Props) {
+  const numberOfCandles = Math.floor(
+    (dayjs().add(1, "h").dayOfYear() - 330) / 7
+  );
+
   return (
     <main>
-      <h1 className="text-6xl mb-4 text-yellow-400">Advent</h1>
+      <header className="mb-4 flex items-center gap-2">
+        <h1 className="text-6xl text-yellow-400 mt-1">Advent</h1>
+        {new Array(numberOfCandles).fill(0).map((_, i) => (
+          <Image key={i} src="/candle.png" alt="Kerze" height={40} width={50} />
+        ))}
+      </header>
+
       <h2 className="text-4xl mb-4">{`Gewinner (${dayjs().format(
         "DD.MM.YYYY"
       )})`}</h2>
@@ -42,15 +53,22 @@ export default function Home({ items }: Props) {
           </p>
         ))}
       </div>
-      <p>
+      <p className="mb-4">
         Seite von{" "}
         <a
-          href="https//dominik-heller.de"
+          href="https://dominik-heller.de"
           className="underline text-yellow-400"
         >
           Dominik Heller
         </a>
       </p>
+      <a
+        className="underline text-sm"
+        href="https://www.flaticon.com/free-icons/candle"
+        title="candle icons"
+      >
+        Candle icons created by Freepik - Flaticon
+      </a>
     </main>
   );
 }
